@@ -1,0 +1,3 @@
+This kata is about writing a function in Scala to translate arabic numerals into romain numerals.
+
+e.g. 1 => I, 2 => II, 3 = III, ..., 90 => XC, ...
