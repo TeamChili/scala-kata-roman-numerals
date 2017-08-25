@@ -2,18 +2,22 @@
 object RomanNumerals {
 
   def toRoman(number: Int): String = {
-    if (number < 10) toRoman1To9(number, ("I", "V", "X"))
-    else if (number < 100) toRoman1To9(number / 10, ("X", "L", "C")) + toRoman(number % 10)
-    else if (number < 1000) toRoman1To9(number / 100, ("C", "D", "M")) + toRoman(number % 100)
-    else "M" * (number / 1000) + toRoman(number % 1000)
+    number match {
+      case n if n < 10 => toRoman0To9(number, ("I", "V", "X"))
+      case n if n < 100 => toRoman0To9(number / 10, ("X", "L", "C")) + toRoman(number % 10)
+      case n if n < 1000 => toRoman0To9(number / 100, ("C", "D", "M")) + toRoman(number % 100)
+      case _ => "M" * (number / 1000) + toRoman(number % 1000)
+    }
   }
 
-  def toRoman1To9(number: Int, signs: (String, String, String)): String = {
-    if (number == 0) ""
-    else if (number <= 3) signs._1.toString * number
-    else if (number < 5) signs._1 + signs._2
-    else if (number == 5) signs._2
-    else if (number <= 8) signs._2 + signs._1 * (number - 5)
-    else signs._1 + signs._3
+  def toRoman0To9(number: Int, numerals: (String, String, String)): String = {
+    number match {
+      case n if n == 0 => ""
+      case n if n <= 3 => numerals._1.toString * number
+      case n if n < 5 => numerals._1 + numerals._2
+      case n if n == 5 => numerals._2
+      case n if n <= 8 => numerals._2 + numerals._1 * (number - 5)
+      case _ => numerals._1 + numerals._3
+    }
   }
 }
